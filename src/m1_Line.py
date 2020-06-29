@@ -3,8 +3,8 @@ A simple   Line   class.
 NOTE: This is NOT rosegraphics -- it is your OWN Line class.
 
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Marc Fernandez.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import math
 import m1t_test_Line as m1t
@@ -15,7 +15,7 @@ import m1t_test_Line as m1t
 ########################################################################
 
 # ----------------------------------------------------------------------
-# TODO: 2. With your instructor, READ THE INSTRUCTIONS
+# DONE: 2. With your instructor, READ THE INSTRUCTIONS
 #   in file  m0_INSTRUCTIONS.txt, asking questions as needed.
 #   Once you understand the instructions, mark this TO DO as DONE.
 #
@@ -123,7 +123,6 @@ class Point(object):
         Treats two numbers as "equal" if they are within 6 decimal
         places of each other for both x and y coordinates.
         """
-
         return (round(self.x, 6) == round(p2.x, 6) and
                 round(self.y, 6) == round(p2.y, 6))
 
@@ -217,7 +216,7 @@ class Line(object):
           :type end:   Point
         """
         # --------------------------------------------------------------
-        # TODO: 3.
+        # DONE: 3.
         #   a. READ the above specification, including the Example.
         #        ** ASK QUESTIONS AS NEEDED. **
         #        ** Be sure you understand it, ESPECIALLY the Example.
@@ -225,6 +224,9 @@ class Line(object):
         #        The tests are already written (below).
         #        They include the Example in the above doc-string.
         # --------------------------------------------------------------
+        self.start=start
+        self.end=end
+        self.total_clones=0
 
     def __repr__(self):
         """
@@ -325,6 +327,8 @@ class Line(object):
         Type hints:
           :rtype: Line
         """
+        self.total_clones=self.total_clones+1
+        return Line(self.start.clone(),self.end.clone())
         # --------------------------------------------------------------
         # TODO: 4.
         #   a. READ the above specification, including the Example.
@@ -358,6 +362,10 @@ class Line(object):
             line1.reverse()
             print(line1 == line2)    # Should now print: True
         """
+        start=self.end
+        end=self.start
+        self.start=start
+        self.end=end
         # --------------------------------------------------------------
         # TODO: 5.
         #   a. READ the above specification, including the Example.
@@ -394,6 +402,11 @@ class Line(object):
         Type hints:
           :rtype: float
         """
+        if (self.end.x-self.start.x)==0:
+            return math.inf
+        else:
+            slopeequation = ((self.end.y - self.start.y) / (self.end.x - self.start.x))
+            return slopeequation
         # --------------------------------------------------------------
         # TODO: 6.
         #   a. READ the above specification, including the Example.
@@ -427,6 +440,8 @@ class Line(object):
         Type hints:
           :rtype: float
         """
+        distance=math.sqrt(((self.end.x-self.start.x)**2)+((self.end.y-self.start.y)**2))
+        return distance
         # --------------------------------------------------------------
         # TODO: 7.
         #   a. READ the above specification, including the Example.
@@ -467,6 +482,7 @@ class Line(object):
         Type hints:
           :rtype: int:
         """
+        return self.total_clones
         # --------------------------------------------------------------
         # TODO: 8.
         #   a. READ the above specification, including the Example.
@@ -501,6 +517,13 @@ class Line(object):
           :type  other_line: Line
           :rtype: Line:
         """
+        StartTotalX=(self.start.x+other_line.start.x)
+        StartTotalY=(self.start.y+other_line.start.y)
+        EndTotalX=(self.end.x+other_line.end.x)
+        EndTotalY=(self.end.y+other_line.end.y)
+        StartPoint=Point(StartTotalX,StartTotalY)
+        EndPoint=Point(EndTotalX,EndTotalY)
+        return Line(StartPoint,EndPoint)
         # --------------------------------------------------------------
         # TODO: 9.
         #   a. READ the above specification, including the Example.
